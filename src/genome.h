@@ -23,7 +23,39 @@ genome* initGenome() {
 	return new genome;
 }
 
-void add_instruction(genome* g) {
+gene_s createNewGene() {
+	gene_s new_gene;
+
+	new_gene.instruction_ = rand()%MAX_CODEWARS_INSTRUCTION;
 	
+	new_gene.arg_mod_one_ = rand()%MAX_ARGUMENT_MOD;
+	new_gene.arg_mod_two_ = rand()%MAX_ARGUMENT_MOD;
+
+	new_gene.arg_one_ = rand()%MAX_MEMORY;
+	new_gene_arg_two_ = rand()%MAX_MEMORY;
+
+	return new_gene;
+}
+
+void mutate_instruction(gene_s* g) {
+	g->instruction_ = rand()%MAX_CODEWARS_INSTRUCTION;
+}
+
+void mutate_argument(gene_s* g) {
+	if(rand()%2 == 0) {
+		g->arg_one_ = rand()%MAX_MEMORY;
+	} else {
+		g->arg_two_ = rand()%MAX_MEMORY;
+	}
+}
+
+void mutate_arg_mode(gene_s* g) {
+	if(rand()%2 == 0) {
+		g->arg_mod_one_ = rand()%MAX_ARGUMENT_MOD;
+	} else {
+		g->arg_mod_two_ = rand()%MAX_ARGUMENT_MOD;
+	}
+}
+
 
 #endif
