@@ -4,22 +4,26 @@
 #include <string>
 #include <vector>
 #include "codewars.h"
+#include <ctime>
+#include <cstdlib>
 
-typedef struct Genome {
-	string instruction_;
-	char arg_mod_one_;
-	char arg_mod_two_;
-	char arg_one_;
-	char arg_two_;
-} genome_s;
+typedef struct Gene {
+	Instruction instruction_;
+	addmode arg_mod_one_;
+	addmode arg_mod_two_;
+	int arg_one_;
+	int arg_two_;
+} gene_s;
 
-vector<genome_s>* initGenome() {
-	genome = new vector<genome_s>;
+typedef vector<Gene> genome;
 
-	return genome;
+genome* initGenome() {
+	srand(time(NULL));
 
+	return new genome;
 }
 
-
+void add_instruction(genome* g) {
+	
 
 #endif
