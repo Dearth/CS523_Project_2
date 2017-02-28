@@ -5,6 +5,9 @@ const int MAX_CODEWARS_INSTRUCTION = 20;
 const int MAX_ARGUMENT_MOD = 7;
 const int MAX_MEMORY = 8000;
 
+const string instructions[]={"DAT","MOV","ADD","SUB","MUL","DIV","MOD","JMP",
+"JMZ","JMN","DJN","SPL","CMP","SEQ","SNE","SLT","LDP","STP","NOP"};
+
 enum Instructions {
 	DAT = 0,
 	MOV,
@@ -27,6 +30,7 @@ enum Instructions {
 	NOP
 };
 
+const string addressmode[]={"#","$","@","<","*","{","}"};
 typedef enum AddressModes {
 	IMMEDIATE = 0,
 	DIRECT,
