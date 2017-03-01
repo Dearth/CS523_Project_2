@@ -17,10 +17,8 @@ void genoToPheno(genome _genome){
   outfile << ";author " << author  << std::endl;
   outfile << ";assert CORESIZE==8000" << std::endl;
   for(Gene gene: _genome) {
-    outfile << instructions[gene.instruction_]<<" "<<gene.arg_mod_one_<<gene.arg_one_<<" "<<gene.arg_mod_two_<<gene.arg_two_<<endl;;
-    /* std::cout << *it; ... */
+    outfile << instructions[gene.instruction_]<<" "<<addressMode[gene.arg_mod_one_]<<gene.arg_one_<<" "<<addressMode[gene.arg_mod_two_]<<gene.arg_two_<<endl;;
   }
-  //outfile << "MOV 0,1" << std::endl;
   
   outfile.close();
   
@@ -52,7 +50,9 @@ int fitness(string file,string author,bool output){
 
 	return 0;
 }
+
 int main() {
+ srand (time(NULL));
   genome _genome;//=initGenome();
   _genome.push_back(createNewGene());
   genoToPheno(_genome);
