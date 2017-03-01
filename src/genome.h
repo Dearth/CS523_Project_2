@@ -17,12 +17,14 @@ typedef struct Gene {
 
 typedef vector<Gene> genome;
 
+//create a genome and seed random generator
 genome* initGenome() {
 	srand(time(NULL));
 
 	return new genome;
 }
 
+//generate a random new gene for genome
 gene_s createNewGene() {
 	gene_s new_gene;
 
@@ -37,10 +39,12 @@ gene_s createNewGene() {
 	return new_gene;
 }
 
+//randomly change the instruction
 void mutate_instruction(gene_s* g) {
 	g->instruction_ = rand()%MAX_CODEWARS_INSTRUCTION;
 }
 
+//randomly change one of the arguments
 void mutate_argument(gene_s* g) {
 	if(rand()%2 == 0) {
 		g->arg_one_ = rand()%MAX_MEMORY;
@@ -49,6 +53,7 @@ void mutate_argument(gene_s* g) {
 	}
 }
 
+//randomly change one of the argument modes
 void mutate_arg_mode(gene_s* g) {
 	if(rand()%2 == 0) {
 		g->arg_mod_one_ = rand()%MAX_ARGUMENT_MOD;
@@ -57,5 +62,19 @@ void mutate_arg_mode(gene_s* g) {
 	}
 }
 
+
+void mutateGenome(genome* g, const int add_g, const int swap_g, const int del_g, const int ins_g, const int change_g) {
+	int index = rand()% g->size();
+
+	//choose mutation on % scale
+	int mutation = rand()%100;
+
+	//generate cummulative percent chances
+	const swap_c = add_g + swap_g;
+
+	if(add_g == mutation) {
+		//add new gene
+	} else if 
+}
 
 #endif
