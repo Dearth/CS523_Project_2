@@ -115,6 +115,10 @@ void mutateGenome(genome* g, 	const int add_gene,
 
 	} else if (mutation <= swap_percent) {
 		//swap genes at two locations
+		if(g->size() < 2) {
+			return;
+		}
+
 		auto first = g->begin() + index_one;
 		auto second = g->begin() + index_two;
 
@@ -122,6 +126,10 @@ void mutateGenome(genome* g, 	const int add_gene,
 	
 	} else if (mutation <= del_percent) {
 		//delete gene
+		if(g->size() == 0) {
+			return;
+		}
+
 		auto loc = g->begin() + index_one;
 
 		g->erase(loc);
@@ -135,6 +143,10 @@ void mutateGenome(genome* g, 	const int add_gene,
 	} else if (mutation <= change_percent) {
 		//change gene
 		//calculate cummulative percentages for mutate
+		if(g->size() == 0) {
+			return;
+		}
+
 		const int mode_percent = mutate_ins + mutate_mode;
 		const int addr_percent = mode_percent + mutate_addr;
 
@@ -171,31 +183,37 @@ genome* onePointCrossover(genome* g1, genome* g2) {
 
 	genome* g = new genome;
 
-	//use smaller vector for pivot point
-	if(s1 < s2) {
-		pivot = rand()%s1;
+	if(s1 == 0) {
+		*g = *g2;
+	} else if (s2 == 0) {
+		*g = *g1;
 	} else {
-		pivot = rand()%s2;
+
+		//use smaller vector for pivot point
+		if(s1 < s2) {
+			pivot = rand()%s1;
+		} else {
+			pivot = rand()%s2;
+		}
+
+		if(rand()%2 == 0) {
+			for(int i = 0; i < pivot; ++i) {
+				g->push_back(g1->at(i));
+			}
+	
+			for(int i = pivot + 1; i < s2; ++i) {
+				g->push_back(g2->at(i));
+			}
+		} else {
+			for(int i = 0; i < pivot; ++i) {
+				g->push_back(g2->at(i));
+			}
+
+			for(int i = pivot + 1; i < s1; ++i) {
+				g->push_back(g1->at(i));
+			}
+		}
 	}
-
-	if(rand()%2 == 0) {
-		for(int i = 0; i < pivot; ++i) {
-			g->push_back(g1->at(i));
-		}
-
-		for(int i = pivot + 1; i < s2; ++i) {
-			g->push_back(g2->at(i));
-		}
-	} else {
-		for(int i = 0; i < pivot; ++i) {
-			g->push_back(g2->at(i));
-		}
-
-		for(int i = pivot + 1; i < s1; ++i) {
-			g->push_back(g1->at(i));
-		}
-	}
-
 	return g;
 }
 
@@ -206,33 +224,38 @@ genome* uniformCrossover(genome* g1, genome* g2) {
 
 	genome* g = new genome;
 
-	if (s1 < s2) {
-		for(int i = 0; i < s1; ++i) {
-			if(rand()%2) {
-				g->push_back(g1->at(i));
-			} else {
-				g->push_back(g2->at(i));
-			}
-		}
-
-		for(int i = s1; i < s2; ++i) {
-			g->push_back(g2->at(i));
-		}
-
+	if(s1 == 0) {
+		*g = *g2;
+	} else if (s2 == 0) {
+		*g = *g1;
 	} else {
-		for(int i = 0; i < s2; ++i) {
-			if(rand()%2) {
-				g->push_back(g1->at(i));
-			} else {
+		if (s1 < s2) {
+			for(int i = 0; i < s1; ++i) {
+				if(rand()%2) {
+					g->push_back(g1->at(i));
+				} else {
+					g->push_back(g2->at(i));
+				}
+			}
+	
+			for(int i = s1; i < s2; ++i) {
 				g->push_back(g2->at(i));
 			}
-		}
 
-		for(int i = s2; i < s1; ++i) {
-			g->push_back(g1->at(i));
+		} else {
+			for(int i = 0; i < s2; ++i) {
+				if(rand()%2) {
+					g->push_back(g1->at(i));
+				} else {
+					g->push_back(g2->at(i));
+				}
+			}
+	
+			for(int i = s2; i < s1; ++i) {
+				g->push_back(g1->at(i));
+			}
 		}
 	}
-
 	return g;
 }
 #endif
