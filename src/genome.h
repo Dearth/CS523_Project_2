@@ -163,6 +163,56 @@ void mutateGenome(genome* g, 	const int add_gene,
 	}
 }
 
+genome* onePointCrossover(genome* g1, genome* g2) {
+	int s1 = g1->size();
+	int s2 = g2->size();
+	int pivot = 0;
+
+	genome* g = new genome;
+
+	//use smaller vector for pivot point
+	if(s1 < s2) {
+		pivot = rand()%s1;
+	} else {
+		pivot = rand()%s2;
+	}
+
+	if(rand()%2 == 0) {
+		for(int i = 0; i < pivot; ++i) {
+			g->push_back(g1->at(i));
+		}
+
+		for(int i = pivot + 1; i < s2; ++i) {
+			g->push_back(g2->at(i));
+		}
+	else {
+		for(int i = 0; i < pivot; ++i) {
+			g->push_back(g2->at(i));
+		}
+
+		for(int i = pivot + 1; i < s1; ++i) {
+			g->push_back(g1->at(i));
+		}
+	}
+
+	return g;
+}
+
+genome* uniformCrossover(genome* g1, genome* g2) {
+	int s1 = g1->size();
+	int s2 = g2->size();
+	int pivot = 0;
+
+	genome* g = new genome;
+
+	if (s1 < s2) {
+		
+	} else {
+	
+	}
+
+	return g;
+}
 #endif
 
 
