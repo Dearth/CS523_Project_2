@@ -8,7 +8,7 @@ using namespace std;
 const string author="God";
 const string name="Neo.RED";
   
-void genoToPheno(genome _genome){
+void genoToPheno(genome* _genome){
 
   ofstream outfile (name);
   
@@ -16,7 +16,7 @@ void genoToPheno(genome _genome){
   outfile << ";name " << name  << std::endl;
   outfile << ";author " << author  << std::endl;
   outfile << ";assert CORESIZE==8000" << std::endl;
-  for(Gene gene: _genome) {
+  for(Gene gene: *_genome) {
     outfile << instructions[gene.instruction_]<<" "
 	    <<addressMode[gene.arg_mod_one_]<<gene.arg_one_<<", "
 	    <<addressMode[gene.arg_mod_two_]<<gene.arg_two_<<endl;;
@@ -54,12 +54,12 @@ int fitness(string file,string author,bool output){
 }
 
 int main() {
- srand (time(NULL));
-  genome _genome;//=initGenome();
-  _genome.push_back(createNewGene());
-  _genome.push_back(createNewGene());
-  _genome.push_back(createNewGene());
-  _genome.push_back(createNewGene());
-  genoToPheno(_genome);
-  printf("%d\n",fitness(name,author,false));
+	//srand (time(NULL));
+	genome* _genome = initGenome();
+	_genome->push_back(createNewGene());
+	_genome->push_back(createNewGene());
+	_genome->push_back(createNewGene());
+	_genome->push_back(createNewGene());
+	genoToPheno(_genome);
+	printf("%d\n",fitness(name,author,false));
 }

@@ -6,6 +6,7 @@
 #include "codewars.h"
 #include <ctime>
 #include <cstdlib>
+using namespace std;
 
 typedef struct Gene {
 	Instructions instruction_;
@@ -103,9 +104,9 @@ void mutateGenome(genome* g, 	const int add_gene,
 	int index_two = rand()%g->size();
 
 	//generate cummulative percent chances for gene mutation
-	const int swap_percent = add_g + swap_g;
-	const int del_percent = swap_percent + del_g;
-	const int ins_percent = del_percent + ins_g;
+	const int swap_percent = add_gene + swap_gene;
+	const int del_percent = swap_percent + del_gene;
+	const int ins_percent = del_percent + ins_gene;
 	const int change_percent = ins_percent + change_gene;
 
 	if(mutation <= mutation) {
@@ -148,7 +149,7 @@ void mutateGenome(genome* g, 	const int add_gene,
 
 		} else if (mutation <= mode_percent) {
 			//change mode
-			mutate_argument_mode(&(*(g->begin()+index_one)));
+			mutate_arg_mode(&(*(g->begin()+index_one)));
 
 		} else if (mutation <= addr_percent) {
 			//change address
@@ -156,7 +157,7 @@ void mutateGenome(genome* g, 	const int add_gene,
 
 		} else {
 			cerr << "Gene mutation percentages add up to less than 100%" << endl; 
-		
+		}	
 	} else {
 		cerr << "Genome mutation percentatges add up to less than 100%" << endl;
 		exit(1);
@@ -185,7 +186,7 @@ genome* onePointCrossover(genome* g1, genome* g2) {
 		for(int i = pivot + 1; i < s2; ++i) {
 			g->push_back(g2->at(i));
 		}
-	else {
+	} else {
 		for(int i = 0; i < pivot; ++i) {
 			g->push_back(g2->at(i));
 		}
