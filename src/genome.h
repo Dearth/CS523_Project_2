@@ -206,9 +206,30 @@ genome* uniformCrossover(genome* g1, genome* g2) {
 	genome* g = new genome;
 
 	if (s1 < s2) {
-		
+		for(int i = 0; i < s1; ++i) {
+			if(rand()%2) {
+				g->push_back(g1->at(i));
+			} else {
+				g->push_back(g2->at(i));
+			}
+		}
+
+		for(int i = s1; i < s2; ++i) {
+			g->push_back(g2->at(i));
+		}
+
 	} else {
-	
+		for(int i = 0; i < s2; ++i) {
+			if(rand()%2) {
+				g->push_back(g1->at(i));
+			} else {
+				g->push_back(g2->at(i));
+			}
+		}
+
+		for(int i = s2; i < s1; ++i) {
+			g->push_back(g1->at(i));
+		}
 	}
 
 	return g;
