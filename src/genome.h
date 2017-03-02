@@ -56,25 +56,145 @@ void mutate_argument(gene_s* g) {
 //randomly change one of the argument modes
 void mutate_arg_mode(gene_s* g) {
 	if(rand()%2 == 0) {
-	  g->arg_mod_one_ = static_cast<addmode>(rand()%MAX_ARGUMENT_MOD);
+		g->arg_mod_one_ = static_cast<addmode>(rand()%MAX_ARGUMENT_MOD);
 	} else {
-		  g->arg_mod_two_ = static_cast<addmode>(rand()%MAX_ARGUMENT_MOD);
+		g->arg_mod_two_ = static_cast<addmode>(rand()%MAX_ARGUMENT_MOD);
 	}
 }
 
+/*
+	add_gene: integer percent chance of adding a new gene (adds are appends to current program)
+	swap_gene: integer percent chance of swaping two genes
+	del_gene: integer percent chance of deleting an existing gene
+	ins_gene: integer percent chance of inserting a new gene
+	change_gene: integer percent chance of mutating a random gene
+	mutate_ins: integer percent chance of mutating a genes instruction
+	mutate_mode: integer percent chance of mutating a genes address mode (equal probability of changing mode 1 or mode 2)
+	mutate_addr: integer percent chance of mutating a genes address (equal probability of changing addr 1 or 2)
 
-void mutateGenome(genome* g, const int add_g, const int swap_g, const int del_g, const int ins_g, const int change_g) {
-	int index = rand()% g->size();
+	sum(*_gene) == 100 and sum(mutate_*) == 100 to be valid percentages
 
+	Values should be given as raw percents, cummulative percentage is calculated internally for control
+	flow.
+
+	ex:
+		if( RANDOM <= add_gene) {
+			//add gene
+		} else if ( RANDOM <= add_gene+swap_gene ) {
+			//swap_gene
+		} 
+		.
+		.
+		.
+*/
+
+void mutateGenome(genome* g, 	const int add_gene, 
+								const int swap_gene, 
+								const int del_gene, 
+								const int ins_gene, 
+								const int change_gene, 
+								const int mutate_ins,
+								const int mutate_mode,
+								const int mutate_addr ) {
+	
 	//choose mutation on % scale
-	int mutation = rand()%100;
+	int mutation = (rand()%100) + 1;
+	int index_one = rand()%g->size();
+	int index_two = rand()%g->size();
 
-	//generate cummulative percent chances
-	const swap_c = add_g + swap_g;
+	//generate cummulative percent chances for gene mutation
+	const int swap_percent = add_g + swap_g;
+	const int del_percent = swap_percent + del_g;
+	const int ins_percent = del_percent + ins_g;
+	const int change_percent = ins_percent + change_gene;
 
-	if(add_g == mutation) {
-		//add new gene
-	} else if 
+	if(mutation <= mutation) {
+		//append a new gene
+		g->push_back(createNewGene());
+
+	} else if (mutation <= swap_percent) {
+		//swap genes at two locations
+		auto first = g->begin() + index_one;
+		auto second = g->begin() + index_two;
+
+		iter_swap(first, second);
+	
+	} else if (mutation <= del_percent) {
+		//delete gene
+		auto loc = g->begin() + index_one;
+
+		g->erase(loc);
+
+	} else if (mutation <= ins_percent) {
+		//insert gene
+		auto loc = g->begin() + index_one;
+
+		g->insert(loc, createNewGene());
+
+	} else if (mutation <= change_percent) {
+		//change gene
+		//calculate cummulative percentages for mutate
+		const int mode_percent = mutate_ins + mutate_mode;
+		const int addr_percent = mode_percent + mutate_addr;
+
+		mutation = (rand()%100) + 1;
+		
+		if(mutation <= mutate_ins) {
+			//change instruction
+			//mutute the gene pointed to by the begin iterator offset by index
+			//dereference the iterator to get the memory location of the gene
+			//instead of memory location of iterator
+			mutate_instruction(&(*(g->begin()+index_one)));
+
+		} else if (mutation <= mode_percent) {
+			//change mode
+			mutate_argument_mode(&(*(g->begin()+index_one)));
+
+		} else if (mutation <= addr_percent) {
+			//change address
+			mutate_argument(&(*(g->begin()+index_one)));
+
+		} else {
+			cerr << "Gene mutation percentages add up to less than 100%" << endl; 
+		
+	} else {
+		cerr << "Genome mutation percentatges add up to less than 100%" << endl;
+		exit(1);
+	}
 }
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
