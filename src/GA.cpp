@@ -14,12 +14,14 @@ int fitness(string file,string author,bool output){
 	char* point;
 	string::size_type sz;
 	while(fgets(buff, sizeof(buff), in)!=NULL){
-	  if(output) printf("%s",buff);
-	  if(point=strstr(buff,author.c_str())){
-	    strncpy(buff,point+author.length()+1,10);
-	    return stoi(buff,&sz);
-	    
-	  }
+		if(output) {
+	  		printf("%s",buff);
+		}
+	
+		if(point=strstr(buff,author.c_str())){
+			strncpy(buff,point+author.length()+1,10);
+	    	return stoi(buff,&sz);
+		}
 	}
 
 	pclose(in);
@@ -30,19 +32,19 @@ int fitness(string file,string author,bool output){
 bool diverse(herd h){
 	int sum=0;
 	for(int i=0;i<h.size();i++){
-		sum+=h.at(i).fittness_;
+		sum+=h.at(i).fitness_;
 	}
-	sum/=h.size();
+	sum /= (double)h.size();
 	if(sum==0) {
 		return true;
 	}
 
 	for(int i=0;i<h.size();i++){
-		x=h.at(i).fittness/sum;
+		double x = (double)h.at(i).fitness_ / sum;
 		double upper_bound = 1.0 + tolerance;
-		double lower_bound = 1.0 - tolerance
+		double lower_bound = 1.0 - tolerance;
 
-		if(!(x>=lower_bound*sum && x<=upper_bound*sum)) {
+		if(!((x >= lower_bound*sum) && (x <= upper_bound*sum))) {
 			return true;
 		}
 	}
