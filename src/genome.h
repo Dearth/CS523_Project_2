@@ -33,9 +33,9 @@ void genoToPheno(genome* _genome,string name){
 	outfile << ";author " << author	<< std::endl;
 	outfile << ";assert CORESIZE==8000" << std::endl;
 	for(Gene gene: *_genome) {
-		outfile << instructions[gene.instruction_]<<" "
-			<<addressMode[gene.arg_mod_one_]<<gene.arg_one_<<", "
-			<<addressMode[gene.arg_mod_two_]<<gene.arg_two_<<endl;;
+		outfile << instructions[gene.instruction_] << " "
+			<< addressMode[gene.arg_mod_one_] << gene.arg_one_<<", "
+			<< addressMode[gene.arg_mod_two_] << gene.arg_two_<<endl;
 	}
 	
 	outfile.close();
