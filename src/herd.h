@@ -48,7 +48,7 @@ void rouletteSelection(herd& h) {
 	
 	double fitness_sum = 0.0;
 	
-	for(int i = 0; < h.size(); ++i) {
+	for(int i = 0; i < h.size(); ++i) {
 		fitness_sum += (double)h.at(i).fitness_;
 	}
 
@@ -73,12 +73,12 @@ void tournmentSelection(herd& h, int size) {
 	herd new_herd;
 
 	for(int i = 0; i < h.size(); ++i) {
-		war_s champion = h.at(rand()%h.size);
+		war_s champion = h.at(rand()%h.size());
 
 		for(int x = 0; x < (size-1); ++x) {
 			int index = rand()%h.size();
 			
-			if(champion.fitness_ < h.at(index)) {
+			if(champion.fitness_ < h.at(index).fitness_) {
 				champion = h.at(index)
 			}
 		}
