@@ -28,6 +28,10 @@ herd initHerd() {
 
 void sortHerd(herd& h) {
 	sort(h.begin(), h.end());
+	for (int i = 0; i < h.size(); ++i) {
+		cout << h.at(i).fitness_;
+	}
+	cout << endl;
 }
 
 void topHalfSelection(herd& h) {
@@ -60,10 +64,10 @@ void rouletteSelection(herd& h) {
 		chance = chance * fitness_sum;
 		int index = 0;
 		
-		while(chance > 0){
+		do{
 			chance -= h.at(index).fitness_;
 			index++;
-		}
+		}while(chance > 0);
 
 		new_herd.push_back(h.at(index));
 
@@ -103,7 +107,7 @@ void singlePointCrossover(herd& h) {
 		temp.fitness_ = 0;
 		temp.g_ = onePointCrossover(h.at(index_one).g_, h.at(index_two).g_);
 
-		new_herd.at(i) = temp;
+		new_herd.push_back(temp);
 	}
 
 	h = new_herd;
@@ -120,7 +124,7 @@ void uniformCrossover(herd& h) {
 		temp.fitness_ = 0;
 		temp.g_ = uniformCrossover(h.at(index_one).g_, h.at(index_two).g_);
 
-		new_herd.at(i) = temp;
+		new_herd.push_back(temp);
 	}
 
 	h = new_herd;

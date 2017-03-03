@@ -6,6 +6,7 @@ int fitness(string file,string author,bool output){
 	char buff[512];
 	string cmd="./pmars -r 100 ../WilkiesBench/NOBODY.RED "+file;
 	author+=" scores";
+	string error = "error";
 	//cout<<author;
 	if(!(in = popen(cmd.c_str(), "r"))){
 		return -1;
@@ -18,10 +19,15 @@ int fitness(string file,string author,bool output){
 	  		printf("%s",buff);
 		}
 	
-		if(point=strstr(buff,author.c_str())){
+		if(NULL != (point=strstr(buff,author.c_str()))){
 			strncpy(buff,point+author.length()+1,10);
 			pclose(in);
 	    	return stoi(buff,&sz);
+		}
+		
+		if(NULL != (point=strstr(buff,error.c_str()))){
+			pclose(in);
+			return 0;
 		}
 	}
 
