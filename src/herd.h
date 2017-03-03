@@ -2,7 +2,6 @@
 #define _HERD_H_
 
 #include "genome.h"
-#include <algorithm>
 
 typedef Warrior {
 	int fitness_;

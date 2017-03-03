@@ -1,12 +1,7 @@
 #ifndef _GNM_H_
 #define _GNM_H_
 
-#include <string>
-#include <vector>
 #include "codewars.h"
-#include <ctime>
-#include <cstdlib>
-using namespace std;
 
 typedef struct Gene {
 	Instructions instruction_;

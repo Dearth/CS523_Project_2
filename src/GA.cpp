@@ -1,9 +1,4 @@
-#include <iostream>
-#include <stdio.h>
-#include <string.h>
-#include <fstream>
 #include "herd.h"
-using namespace std;
 
 int fitness(string file,string author,bool output){
 
