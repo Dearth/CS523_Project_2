@@ -22,7 +22,8 @@ genome* initGenome() {
 
 void genoToPheno(genome* _genome,string name){
 
-	ofstream outfile (name);
+	ofstream outfile;
+	outfile.open(name.c_str(), std::ofstream::trunc);
 	if(outfile.fail()) {
 		cerr << "Error opening up file: " << name << endl;
 		exit(1);
