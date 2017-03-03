@@ -31,7 +31,7 @@ int ins_gene = 20;
 int change_gene = 20;
 
 int mutate_ins = 33;
-int mutate mode = 33;
+int mutate_mode = 33;
 int mutate_addr = 34;
 
 const std::string instructions[]={"DAT","MOV","ADD","SUB","MUL","DIV","MOD","JMP","JMZ","JMN","DJN","SPL","CMP","SEQ","SNE","SLT","LDP","STP","NOP"};
