@@ -79,7 +79,7 @@ void tournmentSelection(herd& h, int size) {
 			int index = rand()%h.size();
 			
 			if(champion.fitness_ < h.at(index).fitness_) {
-				champion = h.at(index)
+				champion = h.at(index);
 			}
 		}
 
