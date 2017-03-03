@@ -20,6 +20,7 @@ int fitness(string file,string author,bool output){
 	
 		if(point=strstr(buff,author.c_str())){
 			strncpy(buff,point+author.length()+1,10);
+			pclose(in);
 	    	return stoi(buff,&sz);
 		}
 	}
