@@ -22,8 +22,12 @@ const string author="God";
 const string name="Neo.RED";
 const double tolerance = 0.01;
 
+int crossover_rate = 50;
+int mutation_rate = 50;
+
 int crossover_type = 0; //0 = no crossover, 1 = single point, 2 = uniform
 int selection_type = 0; //0 = topHalf, 1 = roulette, 2 = tournment
+const int TOURNAMENT_SIZE = 2;
 
 int add_gene = 20;
 int swap_gene = 20;

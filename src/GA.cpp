@@ -74,7 +74,7 @@ void runGA(int crossover_rate, int mutation_rate) {
 	
 		for(int i=0;i<h.size();i++){
 		  genoToPheno(h.at(i).g_,name);
-		  h.at(i).fittness_=fittness(name,author,false);
+		  h.at(i).fitness_ = fitness(name,author,false);
 		}
 		
 		if(selection_type == 0) {
@@ -82,21 +82,13 @@ void runGA(int crossover_rate, int mutation_rate) {
 		} else if (selection_type == 1) {
 			rouletteSelection(h);
 		} else if (selection_type == 2) {
-			tournmentSelection(h);
+			tournmentSelection(h, TOURNAMENT_SIZE);
 		}
 	}
 	sortHerd(h);
-	genoToPheno(h.at(h.size-1),name);
+	genoToPheno(h.at(h.size()-1).g_ ,name);
 }
 
 int main() {
-	//srand (time(NULL));
-	genome* _genome = initGenome();
-	_genome->push_back(createNewGene());
-	_genome->push_back(createNewGene());
-	_genome->push_back(createNewGene());
-	_genome->push_back(createNewGene());
-	genoToPheno(_genome);
-
-	printf("%d\n",fitness(name,author,false));
+	runGA(crossover_rate, mutation_rate);
 }
