@@ -32,10 +32,13 @@ void sortHerd(herd& h) {
 
 void topHalfSelection(herd& h) {
 	sortHerd(h);
+	int index;
 
-	for(int i = h.size(); i > h.size()/2; --i) {
-		int index = rand()%(h.size()/2) + (h.size()/2);
-		
+	for(int i = h.size()-1; i > h.size()/2; --i) {
+		do {
+			index = rand() % h.size();
+		} while(index < (h.size()/2));
+
 		h.at(i) = h.at(index);
 	}
 

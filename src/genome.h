@@ -117,8 +117,12 @@ void mutateGenome(genome* g, 	const int add_gene,
 	
 	//choose mutation on % scale
 	int mutation = (rand()%100) + 1;
-	int index_one = rand()%g->size();
-	int index_two = rand()%g->size();
+	int index_one, index_two;
+
+	if(g->size() != 0) {
+		index_one = rand()%g->size();
+		index_two = rand()%g->size();
+	}
 
 	//generate cummulative percent chances for gene mutation
 	const int swap_percent = add_gene + swap_gene;
