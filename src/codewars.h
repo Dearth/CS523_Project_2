@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
+#include <cstring>
 using namespace std;
 
 const int MAX_CODEWARS_INSTRUCTION = 20;
