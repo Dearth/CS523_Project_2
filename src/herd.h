@@ -15,6 +15,8 @@ typedef vector<war_s> herd;
 herd initHerd() {
 	herd h;
 
+	srand(time(NULL));
+
 	for(int i = 0; i < POPULATION_SIZE; ++i) {
 		war_s temp;
 		temp.fitness_ = 0;
@@ -28,10 +30,6 @@ herd initHerd() {
 
 void sortHerd(herd& h) {
 	sort(h.begin(), h.end());
-	for (int i = 0; i < h.size(); ++i) {
-		cout << h.at(i).fitness_;
-	}
-	cout << endl;
 }
 
 void topHalfSelection(herd& h) {
@@ -53,21 +51,27 @@ void rouletteSelection(herd& h) {
 	
 	herd new_herd;
 	
-	double fitness_sum = 0.0;
+	int fitness_sum = 0;
 	
 	for(int i = 0; i < h.size(); ++i) {
-		fitness_sum += (double)h.at(i).fitness_;
+		fitness_sum += h.at(i).fitness_;
+	}
+
+	if(fitness_sum == 0) {
+		return;
 	}
 
 	for(int i = 0; i < h.size(); ++i) {
-		double chance = (((double) rand()) / RAND_MAX);
-		chance = chance * fitness_sum;
 		int index = 0;
+		int chance = rand() % fitness_sum;
 		
-		do{
+		for(int index = 0; index < h.size(); ++index) {
 			chance -= h.at(index).fitness_;
-			index++;
-		}while(chance > 0);
+
+			if(chance <= 0) {
+				break;
+			}
+		}
 
 		new_herd.push_back(h.at(index));
 
