@@ -88,5 +88,55 @@ void tournmentSelection(herd& h, int size) {
 
 	h = new_herd;
 }
-		
+
+void singlePointCrossover(herd& h) {
+	herd new_herd;
+
+	for(int i = 0; i < h.size(); ++i) {
+		int index_one = rand()%h.size();
+		int index_two = rand()%h.size();
+
+		war_s temp;
+		temp.fitness_ = 0;
+		temp.g_ = onePointCrossover(h.at(index_one).g_, h.at(index_two).g_);
+
+		new_herd.at(i) = temp;
+	}
+
+	h = new_herd;
+}
+
+void uniformCrossover(herd& h) {
+	herd new_herd;
+
+	for(int i = 0; i < h.size(); ++i) {
+		int index_one = rand()%h.size();
+		int index_two = rand()%h.size();
+
+		war_s temp;
+		temp.fitness_ = 0;
+		temp.g_ = uniformCrossover(h.at(index_one).g_, h.at(index_two).g_);
+
+		new_herd.at(i) = temp;
+	}
+
+	h = new_herd;
+}
+
+void mutateHerd(herd& h,	const int add_gene, 
+						 	const int swap_gene, 
+							const int del_gene, 
+							const int ins_gene, 
+							const int change_gene, 
+							const int mutate_ins,
+							const int mutate_mode,
+							const int mutate_addr ) {
+	
+	for(int i = 0; i < h.size(); ++i) {
+	
+		mutateGenome(h.at(i).g_ , add_gene, swap_gene, del_gene, ins_gene, change_gene, mutate_ins, mutate_mode, mutate_addr); 	
+
+	}
+
+}
 #endif
