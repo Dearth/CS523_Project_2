@@ -16,7 +16,10 @@ herd initHerd() {
 	herd h;
 
 	for(int i = 0; i < POPULATION_SIZE; ++i) {
-		genome* temp = initGenome();
+		war_s temp;
+		temp.fitness_ = 0;
+		temp.g_ = initGenome();
+		
 		h.push_back(temp);
 	}
 
