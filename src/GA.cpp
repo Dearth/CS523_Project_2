@@ -27,7 +27,7 @@ int fitness(string file,string author,bool output){
 		
 		if(NULL != (point=strstr(buff,error.c_str()))){
 			pclose(in);
-			return 0;
+			return -1;
 		}
 	}
 
@@ -65,14 +65,18 @@ void runGA(int crossover_rate, int mutation_rate) {
 	while(diverse(h)){
 		int event = rand() % 100;
 	
-	       
 		if(event <= crossover_rate) {
+			cerr << "Performing crossover" << endl;
+
 			if(crossover_type == 1) {
+				cerr << "one point crossover" << endl;
 				singlePointCrossover(h);
 			}else if (crossover_type == 2) {
+				cerr << "uniform crossover" << endl;
 				uniformCrossover(h);
 			}
 		} else if (event <= mutation_rate + crossover_rate) {
+			cerr << "Mutating " << endl;
 			mutateHerd(h, add_gene, swap_gene, del_gene, ins_gene, change_gene, mutate_ins, mutate_mode, mutate_addr);
 		} else {
 			cerr << "Crossover rate and mutation rate add up to less than 100%\n";
