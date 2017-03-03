@@ -12,7 +12,7 @@
 #include <cstring>
 using namespace std;
 
-const int MAX_CODEWARS_INSTRUCTION = 20;
+const int MAX_CODEWARS_INSTRUCTION = 19;
 const int MAX_ARGUMENT_MOD = 7;
 const int MAX_MEMORY = 8000;
 
