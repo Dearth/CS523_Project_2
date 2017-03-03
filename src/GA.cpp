@@ -6,6 +6,7 @@
 using namespace std;
 const string author="God";
 const string name="Neo.RED";
+const double tolerance = 0.01;
 
 int crossover_type = 0; //0 = no crossover, 1 = single point, 2 = uniform
 int selection_type = 0; //0 = topHalf, 1 = roulette, 2 = tournment
@@ -22,19 +23,19 @@ int mutate_addr = 34;
 
 void genoToPheno(genome* _genome,String name){
 
-  ofstream outfile (name);
-  
-  outfile << ";redcode-94" << std::endl;
-  outfile << ";name " << name  << std::endl;
-  outfile << ";author " << author  << std::endl;
-  outfile << ";assert CORESIZE==8000" << std::endl;
-  for(Gene gene: *_genome) {
-    outfile << instructions[gene.instruction_]<<" "
-	    <<addressMode[gene.arg_mod_one_]<<gene.arg_one_<<", "
-	    <<addressMode[gene.arg_mod_two_]<<gene.arg_two_<<endl;;
-  }
-  
-  outfile.close();
+	ofstream outfile (name);
+	
+	outfile << ";redcode-94" << std::endl;
+	outfile << ";name " << name	<< std::endl;
+	outfile << ";author " << author	<< std::endl;
+	outfile << ";assert CORESIZE==8000" << std::endl;
+	for(Gene gene: *_genome) {
+		outfile << instructions[gene.instruction_]<<" "
+			<<addressMode[gene.arg_mod_one_]<<gene.arg_one_<<", "
+			<<addressMode[gene.arg_mod_two_]<<gene.arg_two_<<endl;;
+	}
+	
+	outfile.close();
   
 }
 
@@ -66,17 +67,25 @@ int fitness(string file,string author,bool output){
 }
 
 bool diverse(herd h){
-  int sum=0;
-  for(int i=0;i<h.size();i++){
-    sum+=h.at(i).fittness_;
-  }
-  sum/=h.size();
-  if(sum==0) return true;
-  for(int i=0;i<h.size();i++){
-    x=h.at(i).fittness/sum;
-    if(!(x>=0.99*sum && x<=1.01*sum)) return true;
-  }
-  return false;
+	int sum=0;
+	for(int i=0;i<h.size();i++){
+		sum+=h.at(i).fittness_;
+	}
+	sum/=h.size();
+	if(sum==0) {
+		return true;
+	}
+
+	for(int i=0;i<h.size();i++){
+		x=h.at(i).fittness/sum;
+		double upper_bound = 1.0 + tolerance;
+		double lower_bound = 1.0 - tolerance
+
+		if(!(x>=lower_bound*sum && x<=upper_bound*sum)) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void runGA(int crossover_rate, int mutation_rate) {
@@ -84,34 +93,34 @@ void runGA(int crossover_rate, int mutation_rate) {
 	herd h = initHerd();
 
 	while(diverse(h)){
-	int event = rand() % 100;
-
-       
-	if(event <= crossover_rate) {
-		if(crossover_type == 1) {
-			singlePointCrossover(h);
-		}else if (crossover_type == 2) {
-			uniformCrossover(h);
-		}
-	} else if (event <= mutation_rate + crossover_rate) {
-		mutateHerd(h, add_gene, swap_gene, del_gene, ins_gene, change_gene, mutate_ins, mutate_mode, mutate_addr);
-	} else {
-		cerr << "Crossover rate and mutation rate add up to less than 100%\n";
-		exit(1);
-	}
-
-	for(int i=0;i<h.size();i++){
-	  genoToPheno(h.at(i).g_,name);
-	  h.at(i).fittness_=fittness(name,author,false);
-	}
+		int event = rand() % 100;
 	
-	if(selection_type == 0) {
-		topHalfSelection(h);
-	} else if (selection_type == 1) {
-		rouletteSelection(h);
-	} else if (selection_type == 2) {
-		tournmentSelection(h);
-	}
+	       
+		if(event <= crossover_rate) {
+			if(crossover_type == 1) {
+				singlePointCrossover(h);
+			}else if (crossover_type == 2) {
+				uniformCrossover(h);
+			}
+		} else if (event <= mutation_rate + crossover_rate) {
+			mutateHerd(h, add_gene, swap_gene, del_gene, ins_gene, change_gene, mutate_ins, mutate_mode, mutate_addr);
+		} else {
+			cerr << "Crossover rate and mutation rate add up to less than 100%\n";
+			exit(1);
+		}
+	
+		for(int i=0;i<h.size();i++){
+		  genoToPheno(h.at(i).g_,name);
+		  h.at(i).fittness_=fittness(name,author,false);
+		}
+		
+		if(selection_type == 0) {
+			topHalfSelection(h);
+		} else if (selection_type == 1) {
+			rouletteSelection(h);
+		} else if (selection_type == 2) {
+			tournmentSelection(h);
+		}
 	}
 	sortHerd(h);
 	genoToPheno(h.at(h.size-1),name);
