@@ -3,7 +3,7 @@
 
 #include "genome.h"
 
-typedef Warrior {
+typedef struct Warrior {
 	int fitness_;
 	genome* g_;
 
