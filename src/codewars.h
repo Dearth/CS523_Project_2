@@ -5,6 +5,8 @@ const int MAX_CODEWARS_INSTRUCTION = 20;
 const int MAX_ARGUMENT_MOD = 7;
 const int MAX_MEMORY = 8000;
 
+const int POPULATION_SIZE = 100;
+
 const string author="God";
 const string name="Neo.RED";
 const double tolerance = 0.01;

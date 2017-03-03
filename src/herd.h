@@ -4,8 +4,6 @@
 #include "genome.h"
 #include <algorithm>
 
-const int POPULATION_SIZE = 100;
-
 typedef Warrior {
 	int fitness_;
 	genome* g_;
