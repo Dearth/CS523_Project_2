@@ -20,7 +20,7 @@ int mutate_ins = 33;
 int mutate mode = 33;
 int mutate_addr = 34;
 
-void genoToPheno(genome* _genome){
+void genoToPheno(genome* _genome,String name){
 
   ofstream outfile (name);
   
@@ -65,12 +65,28 @@ int fitness(string file,string author,bool output){
 	return 0;
 }
 
+bool diverse(herd h){
+  int sum=0;
+  for(int i=0;i<h.size();i++){
+    sum+=h.at(i).fittness_;
+  }
+  sum/=h.size();
+  if(sum==0) return true;
+  for(int i=0;i<h.size();i++){
+    x=h.at(i).fittness/sum;
+    if(!(x>=0.99*sum && x<=1.01*sum)) return true;
+  }
+  return false;
+}
+
 void runGA(int crossover_rate, int mutation_rate) {
 	
 	herd h = initHerd();
 
+	while(diverse(h)){
 	int event = rand() % 100;
 
+       
 	if(event <= crossover_rate) {
 		if(crossover_type == 1) {
 			singlePointCrossover(h);
@@ -84,6 +100,11 @@ void runGA(int crossover_rate, int mutation_rate) {
 		exit(1);
 	}
 
+	for(int i=0;i<h.size();i++){
+	  genoToPheno(h.at(i).g_,name);
+	  h.at(i).fittness_=fittness(name,author,false);
+	}
+	
 	if(selection_type == 0) {
 		topHalfSelection(h);
 	} else if (selection_type == 1) {
@@ -91,7 +112,9 @@ void runGA(int crossover_rate, int mutation_rate) {
 	} else if (selection_type == 2) {
 		tournmentSelection(h);
 	}
-		
+	}
+	sortHerd(h);
+	genoToPheno(h.at(h.size-1),name);
 }
 
 int main() {
@@ -102,5 +125,6 @@ int main() {
 	_genome->push_back(createNewGene());
 	_genome->push_back(createNewGene());
 	genoToPheno(_genome);
+
 	printf("%d\n",fitness(name,author,false));
 }
