@@ -21,24 +21,6 @@ int mutate_ins = 33;
 int mutate mode = 33;
 int mutate_addr = 34;
 
-void genoToPheno(genome* _genome,String name){
-
-	ofstream outfile (name);
-	
-	outfile << ";redcode-94" << std::endl;
-	outfile << ";name " << name	<< std::endl;
-	outfile << ";author " << author	<< std::endl;
-	outfile << ";assert CORESIZE==8000" << std::endl;
-	for(Gene gene: *_genome) {
-		outfile << instructions[gene.instruction_]<<" "
-			<<addressMode[gene.arg_mod_one_]<<gene.arg_one_<<", "
-			<<addressMode[gene.arg_mod_two_]<<gene.arg_two_<<endl;;
-	}
-	
-	outfile.close();
-  
-}
-
 int fitness(string file,string author,bool output){
 
 	FILE *in;

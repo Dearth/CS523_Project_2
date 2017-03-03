@@ -25,6 +25,28 @@ genome* initGenome() {
 	return new genome;
 }
 
+void genoToPheno(genome* _genome,string name){
+
+	ofstream outfile (name);
+	if(outfile.fail()) {
+		cerr << "Error opening up file: " << name << endl;
+		exit(1);
+	}
+
+	outfile << ";redcode-94" << std::endl;
+	outfile << ";name " << name	<< std::endl;
+	outfile << ";author " << author	<< std::endl;
+	outfile << ";assert CORESIZE==8000" << std::endl;
+	for(Gene gene: *_genome) {
+		outfile << instructions[gene.instruction_]<<" "
+			<<addressMode[gene.arg_mod_one_]<<gene.arg_one_<<", "
+			<<addressMode[gene.arg_mod_two_]<<gene.arg_two_<<endl;;
+	}
+	
+	outfile.close();
+  
+}
+
 //generate a random new gene for genome
 gene_s createNewGene() {
 	gene_s new_gene;
