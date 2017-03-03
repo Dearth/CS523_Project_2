@@ -2,12 +2,15 @@
 #define _HERD_H_
 
 #include "genome.h"
+#include <algorithm>
 
 const int POPULATION_SIZE = 100;
 
 typedef Warrior {
 	int fitness_;
 	genome* g_;
+
+	bool operator<(Warrior w) { return fitness_ < w.fitness_; }
 } war_s;
 
 typedef vector<war_s> herd;
@@ -24,7 +27,7 @@ herd initHerd() {
 }
 
 void sortHerd(herd& h) {
-	//fill in
+	sort(h.begin(), h.end());
 }
 
 void topHalfSelection(herd& h) {
@@ -69,6 +72,21 @@ void rouletteSelection(herd& h) {
 void tournmentSelection(herd& h, int size) {
 	herd new_herd;
 
-	
+	for(int i = 0; i < h.size(); ++i) {
+		war_s champion = h.at(rand()%h.size);
+
+		for(int x = 0; x < (size-1); ++x) {
+			int index = rand()%h.size();
+			
+			if(champion.fitness_ < h.at(index)) {
+				champion = h.at(index)
+			}
+		}
+
+		new_herd.push_back(champion);
+	}
+
+	h = new_herd;
+}
 		
 #endif
