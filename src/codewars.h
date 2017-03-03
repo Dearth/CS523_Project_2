@@ -13,7 +13,7 @@
 using namespace std;
 
 const int MAX_CODEWARS_INSTRUCTION = 19;
-const int MAX_ARGUMENT_MOD = 7;
+const int MAX_ARGUMENT_MOD = 8;
 const int MAX_MEMORY = 8000;
 
 const int POPULATION_SIZE = 100;
@@ -29,11 +29,11 @@ int crossover_type = 0; //0 = no crossover, 1 = single point, 2 = uniform
 int selection_type = 0; //0 = topHalf, 1 = roulette, 2 = tournment
 const int TOURNAMENT_SIZE = 2;
 
-int add_gene = 20;
-int swap_gene = 20;
-int del_gene = 20;
-int ins_gene = 20;
-int change_gene = 20;
+int add_gene = 3;
+int swap_gene = 23;
+int del_gene = 6;
+int ins_gene = 3;
+int change_gene = 65;
 
 int mutate_ins = 33;
 int mutate_mode = 33;
@@ -63,9 +63,10 @@ enum Instructions {
 	NOP
 };
 
-const std::string addressMode[]={"#","$","@","<","*","{","}"};
+const std::string addressMode[]={"", "#","$","@","<","*","{","}"};
 typedef enum AddressModes {
-	IMMEDIATE = 0,
+	NORMAL = 0,
+	IMMEDIATE,
 	DIRECT,
 	INDIRECT,
 	INDIR_PREDEC,
