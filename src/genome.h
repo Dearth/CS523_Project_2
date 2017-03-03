@@ -15,8 +15,6 @@ typedef std::vector<Gene> genome;
 
 //create a genome and seed random generator
 genome* initGenome() {
-	srand(time(NULL));
-
 	return new genome;
 }
 

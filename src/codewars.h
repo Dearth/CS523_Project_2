@@ -26,7 +26,7 @@ int crossover_rate = 50;
 int mutation_rate = 50;
 
 int crossover_type = 2; //0 = no crossover, 1 = single point, 2 = uniform
-int selection_type = 2; //0 = topHalf, 1 = roulette, 2 = tournment
+int selection_type = 1; //0 = topHalf, 1 = roulette, 2 = tournment
 const int TOURNAMENT_SIZE = 2;
 
 int add_gene = 3;
