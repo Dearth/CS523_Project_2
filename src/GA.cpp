@@ -4,7 +4,7 @@ int fitness(string file,string author,bool output){
 
 	FILE *in;
 	char buff[512];
-	string cmd="./pmars -r 100 ../WilkiesBench/NOBODY.RED "+file;
+	string cmd="./pmars -r 100 ../WilkiesBench/NOBODY.RED " + file + " 2>&1";
 	author+=" scores";
 	string error = "error";
 	//cout<<author;
@@ -86,7 +86,6 @@ void runGA(int crossover_rate, int mutation_rate) {
 			for(int n = 0; n < 10; ++n) {
 				avg_fitness += fitness(name,author,false);
 			}
-			cerr << avg_fitness / 10 << endl;
 			h.at(i).fitness_ = avg_fitness / 10;
 		}
 		
