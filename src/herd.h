@@ -29,10 +29,13 @@ herd initHerd() {
 
 void sortHerd(herd& h) {
 	sort(h.begin(), h.end());
-	for(int i = 0; i < h.size(); ++i) {
-		cerr << h.at(i).fitness_;
+	
+	if(DEBUG) {
+		for(int i = 0; i < h.size(); ++i) {
+			cerr << h.at(i).fitness_;
+		}
+		cerr << endl;
 	}
-	cerr << endl;
 }
 
 void topHalfSelection(herd& h) {
