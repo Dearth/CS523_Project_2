@@ -5,7 +5,7 @@
 
 typedef struct Warrior {
 	int fitness_;
-	genome* g_;
+	genome g_;
 
 	bool operator<(Warrior w) { return fitness_ < w.fitness_; }
 } war_s;
@@ -20,7 +20,6 @@ herd initHerd() {
 	for(int i = 0; i < POPULATION_SIZE; ++i) {
 		war_s temp;
 		temp.fitness_ = 0;
-		temp.g_ = initGenome();
 		
 		h.push_back(temp);
 	}
@@ -30,6 +29,10 @@ herd initHerd() {
 
 void sortHerd(herd& h) {
 	sort(h.begin(), h.end());
+	for(int i = 0; i < h.size(); ++i) {
+		cerr << h.at(i).fitness_;
+	}
+	cerr << endl;
 }
 
 void topHalfSelection(herd& h) {
