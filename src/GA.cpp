@@ -83,10 +83,10 @@ void runGA(int crossover_rate, int mutation_rate) {
 			genoToPheno(h.at(i).g_,name);
 			int avg_fitness = 0;
 		
-			for(int n = 0; n < 10; ++n) {
+			for(int n = 0; n < FITNESS_TRIALS; ++n) {
 				avg_fitness += fitness(name,author,false);
 			}
-			h.at(i).fitness_ = avg_fitness / 10;
+			h.at(i).fitness_ = avg_fitness / FITNESS_TRIALS;
 		}
 		
 		if(selection_type == 0) {
