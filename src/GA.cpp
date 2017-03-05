@@ -97,10 +97,13 @@ void runGA(int crossover_rate, int mutation_rate) {
 			tournmentSelection(h, TOURNAMENT_SIZE);
 		}
 	}
+
 	sortHerd(h);
+	
 	for(int i=0;i<h.size();i++){
 	  cerr<<h.at(i).fitness_;
 	}
+	
 	genoToPheno(h.at(h.size()-1).g_ ,name);
 }
 
