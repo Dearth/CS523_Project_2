@@ -111,7 +111,8 @@ void mutateGenome(genome& g, 	const int add_gene,
 	
 	//choose mutation on % scale
 	int mutation = (rand()%100) + 1;
-	int index_one, index_two;
+	int index_one = 0;
+	int index_two = 0;
 
 	if(g.size() != 0) {
 		index_one = rand()%g.size();
