@@ -12,6 +12,8 @@
 #include <cstring>
 using namespace std;
 
+const bool DEBUG = true;
+
 const int MAX_CODEWARS_INSTRUCTION = 19;
 const int MAX_ARGUMENT_MOD = 8;
 const int MAX_MEMORY = 8000;
