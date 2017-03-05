@@ -129,7 +129,7 @@ void mutateGenome(genome* g, 	const int add_gene,
 	const int ins_percent = del_percent + ins_gene;
 	const int change_percent = ins_percent + change_gene;
 
-	if(mutation <= mutation) {
+	if(mutation <= add_gene) {
 		//append a new gene
 		g->push_back(createNewGene());
 
