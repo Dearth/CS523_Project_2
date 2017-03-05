@@ -28,11 +28,19 @@ herd initHerd() {
 }
 
 void sortHerd(herd& h) {
-	sort(h.begin(), h.end());
+  sort(h.begin(), h.end());
 	for(int i = 0; i < h.size(); ++i) {
-		cerr << h.at(i).fitness_;
+	  cerr << h.at(i).fitness_;
 	}
 	cerr << endl;
+}
+herd elitism(herd& h){
+  herd new_herd;
+  sortHerd(h);		  
+  for(int i=0;i<ELITE_SIZE;i++){
+    new_herd.push_back(h.at(h.size()-i-1));  
+  }
+  return new_herd;  
 }
 
 void topHalfSelection(herd& h) {
@@ -52,7 +60,7 @@ void topHalfSelection(herd& h) {
 void rouletteSelection(herd& h) {
 	sortHerd(h);
 	
-	herd new_herd;
+	herd new_herd=elitism(h);
 	
 	int fitness_sum = 0;
 	
@@ -64,7 +72,7 @@ void rouletteSelection(herd& h) {
 		return;
 	}
 
-	for(int i = 0; i < h.size(); ++i) {
+	for(int i = 0; i < h.size()-ELITE_SIZE; ++i) {
 		int index = 0;
 		int chance = rand() % fitness_sum;
 		
@@ -84,9 +92,9 @@ void rouletteSelection(herd& h) {
 }
 
 void tournmentSelection(herd& h, int size) {
-	herd new_herd;
+       herd new_herd=elitism(h);
 
-	for(int i = 0; i < h.size(); ++i) {
+	for(int i = 0; i < h.size()-ELITE_SIZE; ++i) {
 		war_s champion = h.at(rand()%h.size());
 
 		for(int x = 0; x < (size-1); ++x) {
@@ -104,9 +112,9 @@ void tournmentSelection(herd& h, int size) {
 }
 
 void singlePointCrossover(herd& h) {
-	herd new_herd;
+  herd new_herd=elitism(h);
 
-	for(int i = 0; i < h.size(); ++i) {
+	for(int i = 0; i < h.size()-ELITE_SIZE; ++i) {
 		int index_one = rand()%h.size();
 		int index_two = rand()%h.size();
 
@@ -121,9 +129,9 @@ void singlePointCrossover(herd& h) {
 }
 
 void uniformCrossover(herd& h) {
-	herd new_herd;
+  herd new_herd=elitism(h);
 
-	for(int i = 0; i < h.size(); ++i) {
+	for(int i = 0; i < h.size()-ELITE_SIZE; ++i) {
 		int index_one = rand()%h.size();
 		int index_two = rand()%h.size();
 
@@ -145,12 +153,14 @@ void mutateHerd(herd& h,	const int add_gene,
 							const int mutate_ins,
 							const int mutate_mode,
 							const int mutate_addr ) {
-	
-	for(int i = 0; i < h.size(); ++i) {
-	
-		mutateGenome(h.at(i).g_ , add_gene, swap_gene, del_gene, ins_gene, change_gene, mutate_ins, mutate_mode, mutate_addr); 	
 
-	}
+  //sortHerd(h);
+ 
+  for(int i = 0; i < h.size()-ELITE_SIZE; ++i) {
+     
+  mutateGenome(h.at(i).g_ , add_gene, swap_gene, del_gene, ins_gene, change_gene, mutate_ins, mutate_mode, mutate_addr); 	
+    
+  }
 
 }
 #endif
