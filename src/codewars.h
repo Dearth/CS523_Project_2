@@ -24,6 +24,8 @@ const string author="God";
 const string name="Neo.RED";
 const double tolerance = 0.01;
 
+const int ELITE_SIZE=10;
+
 int crossover_rate = 50;
 int mutation_rate = 50;
 
