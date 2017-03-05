@@ -61,6 +61,7 @@ bool diverse(herd h){
 void runGA(int crossover_rate, int mutation_rate) {
 	
 	herd h = initHerd();
+	int current_generation = 0;
 
 	while(diverse(h)){
 		int event = rand() % 100;
@@ -96,6 +97,12 @@ void runGA(int crossover_rate, int mutation_rate) {
 		} else if (selection_type == 2) {
 			tournmentSelection(h, TOURNAMENT_SIZE);
 		}
+
+		if(!EXIT_ON_TOLERANCE && MAX_GENERATION == current_generation) {
+			break;
+		}
+
+		++current_generation;
 	}
 
 	sortHerd(h);
