@@ -30,6 +30,7 @@ const string name="Neo.RED";
 
 const double tolerance = 0.01;
 
+
 int crossover_rate = 25;
 int mutation_rate = 75;
 
@@ -83,4 +84,18 @@ typedef enum AddressModes {
 	INDIR_POSDEC_A
 } addmode;
 
+const std::string wilkiesBench[]={"BLUEFUNK.RED","CANNON.RED","FSTORM.RED","IRONGATE.RED","MARCIA13.RED","NOBODY.RED","PAPERONE.RED","PSWING.RED","THERMITE.RED","TIME.RED","TORNADO.RED"};
+typedef enum WilkiesBench{
+  BLUEFUNK =0,
+  CANNON,
+  FSTORM,
+  IRONGATE,
+  MARCIA13,
+  NOBODY,
+  PAPERONE,
+  PSWING,
+  THERMITE,
+  TIME,
+  TORNADO
+} wilkies;
 #endif
