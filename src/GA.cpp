@@ -1,10 +1,10 @@
 #include "herd.h"
-
-int fitness(string file,string author,bool output){
+const wilkies BENCH=BLUEFUNK;
+int fitness(string file,string author,bool output,wilkies benchMark){
 
 	FILE *in;
 	char buff[512];
-	string cmd="./pmars -r 100 ../WilkiesBench/NOBODY.RED " + file + " 2>&1";
+	string cmd="./pmars -r 100 ../WilkiesBench/"+wilkiesBench[benchMark]  +" "+ file + " 2>&1";
 	author+=" scores";
 	string error = "error";
 	//cout<<author;
@@ -102,7 +102,7 @@ void runGA(int crossover_rate, int mutation_rate) {
 				int avg_fitness = 0;
 			
 				for(int n = 0; n < FITNESS_TRIALS; ++n) {
-					avg_fitness += fitness(name,author,false);
+				  avg_fitness += fitness(name,author,false,BENCH);
 				}
 			//	h.at(i).fitness_ = avg_fitness / FITNESS_TRIALS;
 				islands.at(i).at(x).fitness_ = avg_fitness;
