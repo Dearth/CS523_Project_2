@@ -96,13 +96,13 @@ void runGA(int crossover_rate, int mutation_rate) {
 				cerr << "Crossover rate and mutation rate add up to less than 100%\n";
 				exit(1);
 			}
-		
+			if(DEBUG) cerr<<wilkiesBench[i]<<": ";
 			for(int x = 0; x < islands.at(i).size(); x++){
 				genoToPheno(islands.at(i).at(x).g_,name);
 				int avg_fitness = 0;
-			
+				
 				for(int n = 0; n < FITNESS_TRIALS; ++n) {
-				  avg_fitness += fitness(name,author,false,BENCH);
+				  avg_fitness += fitness(name,author,false,static_cast<wilkies>(i));
 				}
 			//	h.at(i).fitness_ = avg_fitness / FITNESS_TRIALS;
 				islands.at(i).at(x).fitness_ = avg_fitness;
