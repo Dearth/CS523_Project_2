@@ -192,7 +192,7 @@ void mutateGenome(genome& g, 	const int add_gene,
 	}
 }
 
-genome onePointCrossover(genome& g1, genome& g2) {
+genome singlePointCrossover(genome& g1, genome& g2) {
 	int s1 = g1.size();
 	int s2 = g2.size();
 	int pivot = 0;
