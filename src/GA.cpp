@@ -144,6 +144,80 @@ void runGA(int crossover_rate, int mutation_rate) {
 	}
 }
 
-int main() {
+void usage() {
+	cout << "Running the GA without input will default to 50/50 crossover/mutation rate" << endl;
+	cout << "Defaults: no crossover, bottom half replacement" << endl << endl;
+	cout << fixed;
+	cout << setw(20) << left << "-h, --help" << setw(20) << left << "Print usage" << endl;
+	cout << setw(20) << left << "-d, --debug" << setw(20) << left << "Turn debugging on" << endl;
+	cout << setw(20) << left << "-cr [value]" << setw(20) << left << "Crossover Rate" << endl;
+	cout << setw(20) << left << "-mr [value]" << setw(20) << left << "Mutation Rate" << endl;
+	cout << setw(20) << left << "-ct [0-2]" << setw(20) << left << "Crossover Type" << endl;
+	cout << setw(20) << left << "" << setw(20) << left << "	0 = No crossover" << endl;
+	cout << setw(20) << left << "" << setw(20) << left << "	1 = Single point Crossover" << endl;
+	cout << setw(20) << left << "" << setw(20) << left << "	2 = Uniform Crossover" << endl << endl;
+	cout << setw(20) << left << "-st [0-2]" << setw(20) << left << "Selection Type" << endl;
+	cout << setw(20) << left << "" << setw(20) << left << "	0 = Botton Half Replace" << endl;
+	cout << setw(20) << left << "" << setw(20) << left << "	1 = Roullette" << endl;
+	cout << setw(20) << left << "" << setw(20) << left << "	2 = Tournament" << endl;
+
+}
+
+
+int main(int argc, char** argv) {
+	for(int i = 1; i < argc; ++i) {
+		if(!strncmp(argv[i], "-cr", 3)) {
+			crossover_rate = atoi(argv[i+1]);
+			++i;
+		} else if (!strncmp(argv[i], "-mr", 3)) {
+			mutation_rate = atoi(argv[i+1]);
+			++i;
+		} else if (!strncmp(argv[i], "-ct", 3)) {
+			crossover_type = atoi(argv[i+1]);
+			if((0 > crossover_type) || (crossover_type > 2)) {
+				cout << "Incorrect Crossover Type" << endl;
+				usage();
+				exit(1);
+			}
+			++i;
+		} else if (!strncmp(argv[i], "-st", 3)) {
+			selection_type = atoi(argv[i+1]);
+			if((0 > selection_type) || (selection_type > 2)) {
+				cout << "Incorrect Selection Type" << endl;
+				usage();
+				exit(1);
+			}
+			++i;
+		} else if (!strncmp(argv[i], "-h", 2)) {
+			usage();
+			return 0;
+		} else if (!strncmp(argv[i], "--help", 6)) {
+			usage();
+			return 0;
+		} else if (!strncmp(argv[i], "--debug", 7)) {
+			DEBUG = true;
+		} else if (!strncmp(argv[i], "-d", 2)) {
+			DEBUG = true;
+		} else {
+			cout << "Unknown option" << argv[i] << endl;
+			usage();
+			exit(1);
+		}
+	}
+
+	if(100 != (crossover_rate + mutation_rate)) {
+		cout << "Mutation and Crossover Rates need to add up to 100" << endl;
+		exit(1);
+	}
+
+	if(DEBUG) {
+		cout << "Crossover Rate: " << crossover_rate << endl;
+		cout << "Mutation Rate: " << mutation_rate << endl;
+		cout << "Crossover Type: " << crossover_type << endl;
+		cout << "Selection Type: " << selection_type << endl;
+	}
+
 	runGA(crossover_rate, mutation_rate);
+
+	return 0;
 }
