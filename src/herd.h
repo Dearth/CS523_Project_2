@@ -32,7 +32,7 @@ void sortHerd(herd& h) {
 	
 	if(DEBUG) {
 		for(int i = 0; i < h.size(); ++i) {
-			cerr << h.at(i).fitness_;
+			cerr << h.at(i).fitness_ << " ";
 		}
 		cerr << endl;
 	}
