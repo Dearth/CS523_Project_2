@@ -13,10 +13,10 @@
 #include <cstring>
 using namespace std;
 
-bool DEBUG = false;
+bool DEBUG = true;
 const bool EXIT_ON_TOLERANCE = false;
 
-const int NUMBER_OF_ISLANDS = 1;
+const int NUMBER_OF_ISLANDS = 11;
 const int MAX_GENERATION = 100;
 const int MAX_CODEWARS_INSTRUCTION = 19;
 const int MAX_ARGUMENT_MOD = 8;
@@ -29,7 +29,7 @@ const string author="God";
 const string name="Neo.RED";
 
 const double tolerance = 0.01;
-
+const int FITNESS_TRIALS=1;
 
 int crossover_rate = 50;
 int mutation_rate = 50;

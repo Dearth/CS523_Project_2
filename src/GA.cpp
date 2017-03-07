@@ -82,7 +82,6 @@ void runGA(int crossover_rate, int mutation_rate) {
 	while(islandDiverse){
 		for(int i = 0; i < islands.size(); ++i) {
 			int event = rand() % 100;
-		
 			if(event <= crossover_rate) {
 				if(crossover_type == 1) {
 					singlePointCrossover(islands.at(i));
