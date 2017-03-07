@@ -1,5 +1,5 @@
 #include "herd.h"
-const wilkies BENCH=BLUEFUNK;
+
 int fitness(string file,string author,bool output,wilkies benchMark){
 
 	FILE *in;
@@ -71,13 +71,23 @@ bool islandDiverse(vector<herd>& i) {
 void runGA(int crossover_rate, int mutation_rate) {
 	
 	vector<herd> islands;
+	ofstream outfile;
+
+	//logging expiermental data
+	if(DEBUG) {
+		outfile.open("fitness_over_time.csv");
+		if(outfile.fail()){
+			cerr << "Error opening fitness log" << endl;
+			exit(1);
+		}
+	}
 
 	for(int i = 0; i < NUMBER_OF_ISLANDS; ++i) {
 		herd h = initHerd();
 		islands.push_back(h);
 	}
 
-	int current_generation = 0;
+	int current_generation = 1;
 
 	while(islandDiverse){
 		for(int i = 0; i < islands.size(); ++i) {
@@ -95,7 +105,15 @@ void runGA(int crossover_rate, int mutation_rate) {
 				cerr << "Crossover rate and mutation rate add up to less than 100%\n";
 				exit(1);
 			}
-			if(DEBUG) cerr<<wilkiesBench[i]<<": ";
+			
+			if(DEBUG) {
+				cerr << wilkiesBench[i] << ": ";
+				for(int j = 0; j < islands.at(i).size(); ++j) {
+					cerr << islands.at(i).at(j).fitness_ << ", ";
+				}
+				cerr << endl;
+			}
+
 			for(int x = 0; x < islands.at(i).size(); x++){
 				genoToPheno(islands.at(i).at(x).g_,name);
 				int avg_fitness = 0;
@@ -114,10 +132,22 @@ void runGA(int crossover_rate, int mutation_rate) {
 			} else if (selection_type == 2) {
 				tournmentSelection(islands.at(i), TOURNAMENT_SIZE);
 			}
-	
-			if(!EXIT_ON_TOLERANCE && MAX_GENERATION == current_generation) {
-				break;
+
+					
+
+			if(DEBUG){ 
+				
+				for(int j = 0; j < islands.size(); ++j) {
+					auto most_fit = islands.at(j).end() - 1;
+					outfile << most_fit->fitness_ << ", ";
+				}
+				outfile << endl;
 			}
+
+		}
+		
+		if(!EXIT_ON_TOLERANCE && MAX_GENERATION == current_generation) {
+			break;
 		}
 
 		++current_generation;
@@ -140,6 +170,9 @@ void runGA(int crossover_rate, int mutation_rate) {
 		}
 
 		genoToPheno(best_warrior.g_ ,name);
+	}
+	if(DEBUG) {
+		outfile.close();
 	}
 }
 

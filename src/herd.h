@@ -29,13 +29,6 @@ herd initHerd() {
 
 void sortHerd(herd& h) {
 	sort(h.begin(), h.end());
-	
-	if(DEBUG) {
-		for(int i = 0; i < h.size(); ++i) {
-			cerr << h.at(i).fitness_ << " ";
-		}
-		cerr << endl;
-	}
 }
 
 herd elitism(herd& h){
