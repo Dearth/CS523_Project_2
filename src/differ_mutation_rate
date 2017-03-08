@@ -1,0 +1,22 @@
+#!/bin/bash
+
+for i in {1..10}
+do
+	./genalg_codewars -st 0
+	cp fitness_over_time.csv ../data/bottom_half_rep_${i}.csv
+
+	./genalg_codewars -st 1
+	cp fitness_over_time.csv ../data/roulette_${i}.csv
+
+	./genalg_codewars -st 2
+	cp fitness_over_time.csv ../data/tournament_${i}.csv
+
+	./genalg_codewars -ct 0
+	cp fitness_over_time.csv ../data/no_crossover_${i}.csv
+
+	./genalg_codewars -ct 1
+	cp fitness_over_time.csv ../data/onepoint_crossover_${i}.csv
+
+	./genalg_codewars -ct 2
+	cp fitness_over_time.csv ../data/uniform_crossover_${i}.csv
+done
