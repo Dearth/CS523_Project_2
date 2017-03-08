@@ -137,9 +137,8 @@ void runGA(int crossover_rate, int mutation_rate) {
 
 			if(DEBUG){ 
 				
-				for(int j = 0; j < islands.size(); ++j) {
-					auto most_fit = islands.at(j).end() - 1;
-					outfile << most_fit->fitness_ << ", ";
+				for(int j = 0; j < islands.at(i).size(); ++j) {
+					outfile << islands.at(i).at(j).fitness_ << ", ";
 				}
 				outfile << endl;
 			}
