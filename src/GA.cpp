@@ -113,18 +113,18 @@ void runGA(int crossover_rate, int mutation_rate) {
 				for(int n = 0; n < FITNESS_TRIALS; ++n) {
 				  avg_fitness += fitness(name,author,false,static_cast<wilkies>(i));
 				}
-			//	h.at(i).fitness_ = avg_fitness / FITNESS_TRIALS;
+				islands.at(i).at(x).fitness_ = avg_fitness;
+			}
+		
 			if(DEBUG){ 
+				sortHerd(islands.at(i));
 				cerr << wilkiesBench[i] << ": ";
 				for(int j = 0; j < islands.at(i).size(); ++j) {
 					cerr << islands.at(i).at(j).fitness_ << ", ";
-				}
-				cerr << endl;
-				
-				for(int j = 0; j < islands.at(i).size(); ++j) {
 					outfile << islands.at(i).at(j).fitness_ << ", ";
 				}
 				outfile << endl;
+				cerr << endl;
 			}
 			
 			if(selection_type == 0) {
