@@ -106,14 +106,6 @@ void runGA(int crossover_rate, int mutation_rate) {
 				exit(1);
 			}
 			
-			if(DEBUG) {
-				cerr << wilkiesBench[i] << ": ";
-				for(int j = 0; j < islands.at(i).size(); ++j) {
-					cerr << islands.at(i).at(j).fitness_ << ", ";
-				}
-				cerr << endl;
-			}
-
 			for(int x = 0; x < islands.at(i).size(); x++){
 				genoToPheno(islands.at(i).at(x).g_,name);
 				int avg_fitness = 0;
@@ -122,10 +114,12 @@ void runGA(int crossover_rate, int mutation_rate) {
 				  avg_fitness += fitness(name,author,false,static_cast<wilkies>(i));
 				}
 			//	h.at(i).fitness_ = avg_fitness / FITNESS_TRIALS;
-				islands.at(i).at(x).fitness_ = avg_fitness;
-			}
-			
 			if(DEBUG){ 
+				cerr << wilkiesBench[i] << ": ";
+				for(int j = 0; j < islands.at(i).size(); ++j) {
+					cerr << islands.at(i).at(j).fitness_ << ", ";
+				}
+				cerr << endl;
 				
 				for(int j = 0; j < islands.at(i).size(); ++j) {
 					outfile << islands.at(i).at(j).fitness_ << ", ";
