@@ -17,7 +17,7 @@ bool DEBUG = true;
 const bool EXIT_ON_TOLERANCE = false;
 
 
-const int NUMBER_OF_ISLANDS = 5;
+const int NUMBER_OF_ISLANDS = 1;
 const int MAX_GENERATION = 100;
 const int MAX_CODEWARS_INSTRUCTION = 19;
 const int MAX_ARGUMENT_MOD = 8;

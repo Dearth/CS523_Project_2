@@ -125,16 +125,6 @@ void runGA(int crossover_rate, int mutation_rate) {
 				islands.at(i).at(x).fitness_ = avg_fitness;
 			}
 			
-			if(selection_type == 0) {
-				topHalfSelection(islands.at(i));
-			} else if (selection_type == 1) {
-				rouletteSelection(islands.at(i));
-			} else if (selection_type == 2) {
-				tournmentSelection(islands.at(i), TOURNAMENT_SIZE);
-			}
-
-					
-
 			if(DEBUG){ 
 				
 				for(int j = 0; j < islands.at(i).size(); ++j) {
@@ -142,7 +132,14 @@ void runGA(int crossover_rate, int mutation_rate) {
 				}
 				outfile << endl;
 			}
-
+			
+			if(selection_type == 0) {
+				topHalfSelection(islands.at(i));
+			} else if (selection_type == 1) {
+				rouletteSelection(islands.at(i));
+			} else if (selection_type == 2) {
+				tournmentSelection(islands.at(i), TOURNAMENT_SIZE);
+			}
 		}
 		
 		if(!EXIT_ON_TOLERANCE && MAX_GENERATION == current_generation) {
