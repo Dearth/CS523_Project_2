@@ -2,21 +2,11 @@
 
 for i in {1..10}
 do
-	./genalg_codewars -st 0
-	cp fitness_over_time.csv ../data/bottom_half_rep_${i}.csv
-
-	./genalg_codewars -st 1
-	cp fitness_over_time.csv ../data/roulette_${i}.csv
-
-	./genalg_codewars -st 2
-	cp fitness_over_time.csv ../data/tournament_${i}.csv
-
-	./genalg_codewars -ct 0
-	cp fitness_over_time.csv ../data/no_crossover_${i}.csv
-
-	./genalg_codewars -ct 1
-	cp fitness_over_time.csv ../data/onepoint_crossover_${i}.csv
-
-	./genalg_codewars -ct 2
-	cp fitness_over_time.csv ../data/uniform_crossover_${i}.csv
+	MR=0
+	CR=100
+	for x in {1..19}
+	do
+		./genalg_codewars -st 1 -ct 1 -mr $((MR+x*5)) -cr $((CR-x*5))
+		cp fitness_over_time.csv ../data/mutation_$((MR+x*5))_crossover_$((CR-x*5))_trial_${i}.csv
+	done
 done
