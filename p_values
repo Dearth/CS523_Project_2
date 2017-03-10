@@ -1,0 +1,20 @@
+Selection Types:
+TopHalf vs Roulette
+	RanksumsResult(statistic=1.0871240285021087, pvalue=0.27698199994229844)
+
+TopHalf vs Tournament
+	RanksumsResult(statistic=-6.8928196283937702, pvalue=5.4697211535739652e-12)
+
+Roulette vs Tournament
+	RanksumsResult(statistic=-8.8526866955896342, pvalue=8.5437250132121432e-19)
+
+
+Crossover Types:
+No Cross vs One point
+	RanksumsResult(statistic=1.9593196182944135, pvalue=0.050075367637381192)
+
+No Cross vs Uniform
+	RanksumsResult(statistic=-5.1989032375229751, pvalue=2.004678423035436e-07)
+
+One Point vs Uniform
+	RanksumsResult(statistic=-7.582933713563353, pvalue=3.3782746899385077e-14)
