@@ -17,27 +17,27 @@ bool DEBUG = true;
 const bool EXIT_ON_TOLERANCE = false;
 
 
-const int NUMBER_OF_ISLANDS = 1;
+const int NUMBER_OF_ISLANDS = 5;
 const int MAX_GENERATION = 100;
 const int MAX_CODEWARS_INSTRUCTION = 19;
 const int MAX_ARGUMENT_MOD = 8;
 const int MAX_MEMORY = 8000;
 
-const int POPULATION_SIZE = 50;
+const int POPULATION_SIZE = 100;
 const int ELITE_SIZE=10;
 
 const string author="God";
 const string name="Neo.RED";
 
-const double tolerance = 0.01;
-const int FITNESS_TRIALS=1;
+const double tolerance = 0.05;
+const int FITNESS_TRIALS=20;
 
-int crossover_rate = 50;
-int mutation_rate = 50;
+int crossover_rate = 75;
+int mutation_rate = 25;
 
-int crossover_type = 0; //0 = no crossover, 1 = single point, 2 = uniform
-int selection_type = 0; //0 = topHalf, 1 = roulette, 2 = tournment
-const int TOURNAMENT_SIZE = 3;
+int crossover_type = 1; //0 = no crossover, 1 = single point, 2 = uniform
+int selection_type = 2; //0 = topHalf, 1 = roulette, 2 = tournment
+const int TOURNAMENT_SIZE = 5;
 
 int add_gene = 6;
 int swap_gene = 30;
