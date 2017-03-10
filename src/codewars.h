@@ -17,14 +17,14 @@ bool DEBUG = true;
 const bool EXIT_ON_TOLERANCE = false;
 
 
-const int NUMBER_OF_ISLANDS = 1;
+const int NUMBER_OF_ISLANDS = 4;
 const int MAX_GENERATION = 100;
 const int MAX_CODEWARS_INSTRUCTION = 19;
 const int MAX_ARGUMENT_MOD = 8;
 const int MAX_MEMORY = 8000;
 
 const int POPULATION_SIZE = 50;
-const int ELITE_SIZE=0;
+const int ELITE_SIZE=10;
 
 const string author="God";
 const string name="Neo.RED";
