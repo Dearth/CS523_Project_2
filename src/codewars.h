@@ -13,30 +13,30 @@
 #include <cstring>
 using namespace std;
 
-bool DEBUG = true;
+bool DEBUG = false;
 const bool EXIT_ON_TOLERANCE = false;
 
 
-const int NUMBER_OF_ISLANDS = 1;
-const int MAX_GENERATION = 100;
+const int NUMBER_OF_ISLANDS = 11;
+const int MAX_GENERATION = 10000;
 const int MAX_CODEWARS_INSTRUCTION = 19;
 const int MAX_ARGUMENT_MOD = 8;
 const int MAX_MEMORY = 8000;
 
-const int POPULATION_SIZE = 50;
-const int ELITE_SIZE=0;
+const int POPULATION_SIZE = 100;
+const int ELITE_SIZE=10;
 
-const string author="God";
+const string author="Butterfly Wings";
 const string name="Neo.RED";
 
 const double tolerance = 0.05;
-const int FITNESS_TRIALS=1;
+const int FITNESS_TRIALS=20;
 
-int crossover_rate = 50;
-int mutation_rate = 50;
+int crossover_rate = 10;
+int mutation_rate = 90;
 
 int crossover_type = 0; //0 = no crossover, 1 = single point, 2 = uniform
-int selection_type = 0; //0 = topHalf, 1 = roulette, 2 = tournment
+int selection_type = 2; //0 = topHalf, 1 = roulette, 2 = tournment
 const int TOURNAMENT_SIZE = 5;
 
 int add_gene = 6;
@@ -46,8 +46,8 @@ int ins_gene = 3;
 int change_gene = 60;
 
 int mutate_ins = 50;
-int mutate_mode = 15;
-int mutate_addr = 35;
+int mutate_mode = 10;
+int mutate_addr = 40;
 
 const std::string instructions[]={"DAT","MOV","ADD","SUB","MUL","DIV","MOD","JMP","JMZ","JMN","DJN","SPL","CMP","SEQ","SNE","SLT","LDP","STP","NOP"};
 
