@@ -72,20 +72,6 @@ void runGA(int crossover_rate, int mutation_rate) {
 	
 	vector<herd> islands;
 	ofstream outfile;
-	ofstream best_war;
-	ofstream bester_war;
-
-	best_war.open("Best_war.RED");
-	if(best_war.fail()){
-		cerr << "Error opening best file" << endl;
-		exit(1);
-	}
-	
-	bester_war.open("Bester_war.RED");
-	if(bester_war.fail()){
-		cerr << "Error opening bester file" << endl;
-		exit(1);
-	}
 
 	//logging expiermental data
 	if(DEBUG) {
@@ -191,8 +177,6 @@ void runGA(int crossover_rate, int mutation_rate) {
 	if(DEBUG) {
 		outfile.close();
 	}
-	best_war.close();
-	bester_war.close();
 }
 
 void usage() {
