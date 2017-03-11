@@ -18,3 +18,12 @@ No Cross vs Uniform
 
 One Point vs Uniform
 	RanksumsResult(statistic=-7.582933713563353, pvalue=3.3782746899385077e-14)
+
+tophalf
+RanksumsResult(statistic=0.43775756209152666, pvalue=0.66156203744154851)
+
+roulette
+RanksumsResult(statistic=-5.0290415991459634, pvalue=4.9293745081255625e-07)
+
+tournament
+RanksumsResult(statistic=0.71926853276243241, pvalue=0.47197548035543191)

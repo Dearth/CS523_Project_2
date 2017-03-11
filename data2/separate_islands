@@ -1,0 +1,11 @@
+#!/bin/bash
+
+islands='MARCIA13.RED NOBODY.RED PAPERONE.RED PSWING.RED'
+
+for island in $islands
+do
+	for i in {1..10}
+	do
+		cat island2_${i}.csv | grep ${island} > ${island}_island_${i}.csv
+	done
+done

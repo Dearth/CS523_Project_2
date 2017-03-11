@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for i in {1..10}
+do
+	MR=0
+	CR=100
+	for x in {1..19}
+	do
+		./genalg_codewars -st 1 -ct 1 -mr $((MR+x*5)) -cr $((CR-x*5))
+		cp fitness_over_time.csv ../data/mutation_$((MR+x*5))_crossover_$((CR-x*5))_trial_${i}.csv
+	done
+done
