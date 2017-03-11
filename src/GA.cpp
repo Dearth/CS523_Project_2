@@ -72,6 +72,20 @@ void runGA(int crossover_rate, int mutation_rate) {
 	
 	vector<herd> islands;
 	ofstream outfile;
+	ofstream best_war;
+	ofstream bester_war;
+
+	best_war.open("Best_war.RED");
+	if(best_war.fail()){
+		cerr << "Error opening best file" << endl;
+		exit(1);
+	}
+	
+	bester_war.open("Bester_war.RED");
+	if(bester_war.fail()){
+		cerr << "Error opening bester file" << endl;
+		exit(1);
+	}
 
 	//logging expiermental data
 	if(DEBUG) {
@@ -110,8 +124,8 @@ void runGA(int crossover_rate, int mutation_rate) {
 				genoToPheno(islands.at(i).at(x).g_,name);
 				int avg_fitness = 0;
 				
-				for(int n = 0; n < FITNESS_TRIALS; ++n) {
-				  avg_fitness += fitness(name,author,false,static_cast<wilkies>(i));
+				for(int n = 0; n < 11; ++n) {
+				  avg_fitness += fitness(name,author,false,static_cast<wilkies>(n));
 				}
 				islands.at(i).at(x).fitness_ = avg_fitness;
 			}
@@ -126,7 +140,20 @@ void runGA(int crossover_rate, int mutation_rate) {
 				outfile << endl;
 				cerr << endl;
 			}
+		
+			auto best_warr = islands[0].end()-1;
+			auto bester_warr = islands[0].end()-1;
+			for(int index = 0; index < islands.size(); ++index) {
+				if(best_warr->fitness_ < (islands[index].end()-1)->fitness_) {
+					bester_warr = best_warr;
+					best_warr = islands[index].end()-1;
+				}
+			}
+
+			genoToPheno(best_warr->g_, "Best_Neo.RED");
+			genoToPheno(bester_warr->g_, "Bester_Neo.RED");
 			
+
 			if(selection_type == 0) {
 				topHalfSelection(islands.at(i));
 			} else if (selection_type == 1) {
@@ -139,7 +166,7 @@ void runGA(int crossover_rate, int mutation_rate) {
 		if(!EXIT_ON_TOLERANCE && MAX_GENERATION == current_generation) {
 			break;
 		}
-
+		
 		++current_generation;
 	}
 
@@ -164,6 +191,8 @@ void runGA(int crossover_rate, int mutation_rate) {
 	if(DEBUG) {
 		outfile.close();
 	}
+	best_war.close();
+	bester_war.close();
 }
 
 void usage() {
